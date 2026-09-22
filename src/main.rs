@@ -26,8 +26,10 @@ async fn main() {
 }
 
 async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
-
-    let png = render(r"x = \frac{-b \pm \sqrt{b^{2} - 4ac}}{2a}");
+    let args: Option<&str> = msg.text().and_then(|t| {
+        t.split_once(char::is_whitespace)   // Extract the argument included with the command.
+            .map(|(_, rest)| rest.trim())
+    });
 
     match cmd {
         Command::Start => {
@@ -48,6 +50,8 @@ async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
         }
 
         Command::Equation => {
+            let png = render(args.unwrap());
+
             bot.send_photo(msg.chat.id, InputFile::memory(png).file_name("equation.png"))
                 .await?;
         }
