@@ -1,0 +1,8 @@
+[package]
+name = "Zaydi_helper_bot"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+teloxide = { version = "0.17.0", features = ["macros"] }
+tokio = { version = "1.53.1", features = ["macros", "rt-multi-thread"] }
