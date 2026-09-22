@@ -6,3 +6,7 @@ edition = "2024"
 [dependencies]
 teloxide = { version = "0.17.0", features = ["macros"] }
 tokio = { version = "1.53.1", features = ["macros", "rt-multi-thread"] }
+ratex-parser = "0.1.14"
+ratex-layout = "0.1.14"
+ratex-render = { version = "0.1.14", features = ["embed-fonts"] }
+ratex-types  = "0.1.14"
