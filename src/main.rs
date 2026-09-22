@@ -7,6 +7,8 @@ enum Command {
     Start,
     #[command(description = "show this help")]
     Help,
+    #[command(description = "throw a dice")]
+    Dice,
 }
 
 #[tokio::main]
@@ -19,12 +21,19 @@ async fn main() {
 async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
     match cmd {
         Command::Start => {
-            bot.send_message(msg.chat.id, "Hello! I'm the real zaydi hehehehehe 😈")
+            bot.send_message(msg.chat.id,
+                             "Hello! I'm the real zaydi hehehehehe 😈")
                 .await?;
         }
 
         Command::Help => {
-            bot.send_message(msg.chat.id, Command::descriptions().to_string())
+            bot.send_message(msg.chat.id,
+                             Command::descriptions().to_string())
+                .await?;
+        }
+
+        Command::Dice => {
+            bot.send_dice(msg.chat.id)
                 .await?;
         }
     }
